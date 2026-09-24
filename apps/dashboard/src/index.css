@@ -84,3 +84,122 @@ p {
 .stats span {
   color: #8cb5ff;
 }
+
+.create-link-form {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.create-link-form h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: #dfe9ff;
+}
+
+.create-link-form label {
+  font-size: 0.85rem;
+  color: #8cb5ff;
+}
+
+.create-link-form input {
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(130, 170, 255, 0.25);
+  background: rgba(8, 19, 32, 0.6);
+  color: #e5eefb;
+  font-size: 0.95rem;
+}
+
+.create-link-form button {
+  margin-top: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #3a86ff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.create-link-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.empty-state {
+  color: #8cb5ff;
+  margin-top: 1.5rem;
+}
+
+.link-list {
+  margin-top: 2rem;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.link-list th,
+.link-list td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid rgba(130, 170, 255, 0.15);
+}
+
+.link-list .original-url {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-list .actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.link-list button {
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid rgba(130, 170, 255, 0.25);
+  background: rgba(123, 168, 255, 0.1);
+  color: #dfe9ff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.link-list button.danger {
+  border-color: rgba(255, 107, 107, 0.4);
+  color: #ff9b9b;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .card {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  .link-list {
+    min-width: 680px;
+  }
+}

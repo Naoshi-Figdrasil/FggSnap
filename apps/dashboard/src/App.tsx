@@ -1,27 +1,36 @@
+import { useCallback, useEffect, useState } from 'react';
+import { CreateLinkForm } from './components/CreateLinkForm.js';
+import { LinkList } from './components/LinkList.js';
+import { listLinks } from './services/api.js';
+import { Link } from './types/link.js';
+
 export default function App() {
+  const [links, setLinks] = useState<Link[]>([]);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  const refresh = useCallback(async () => {
+    try {
+      setLinks(await listLinks());
+      setLoadError(null);
+    } catch {
+      setLoadError('Could not load links from the API.');
+    }
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
   return (
     <main className="app-shell">
       <section className="card">
         <p className="eyebrow">FggSnap</p>
-        <h1>URL shortening, analytics, and fast delivery.</h1>
-        <p>
-          This project has been scaffolded as a working monorepo with an API and a dashboard,
-          ready for feature development.
-        </p>
-        <div className="stats">
-          <div>
-            <strong>API</strong>
-            <span>NestJS</span>
-          </div>
-          <div>
-            <strong>UI</strong>
-            <span>React + Vite</span>
-          </div>
-          <div>
-            <strong>Stack</strong>
-            <span>Monorepo</span>
-          </div>
-        </div>
+        <h1>URL shortener</h1>
+
+        <CreateLinkForm onCreated={refresh} />
+
+        {loadError && <p role="alert" className="form-error">{loadError}</p>}
+        <LinkList links={links} onChanged={refresh} />
       </section>
     </main>
   );

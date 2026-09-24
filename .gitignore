@@ -4,4 +4,8 @@ apps/*/.next
 apps/*/coverage
 .env
 .DS_Store
-pnpm-lock.yaml
+.tsbuildinfo, dist
+coverage
+data
+vite.config.js
+vite.config.d.ts.

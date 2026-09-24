@@ -1,0 +1,48 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "${API_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      BASE_URL: "${BASE_URL:-http://localhost:3000}"
+      LINKS_DATA_FILE: /app/data/links.json
+    volumes:
+      - links_data:/app/data
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+      args:
+        VITE_API_URL: "${VITE_API_URL:-http://localhost:3000}"
+    ports:
+      - "${DASHBOARD_PORT:-5173}:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  # Optional local database. The current API stores links in JSON, so this
+  # service is not required and does not replace an existing PostgreSQL container.
+  postgres:
+    image: postgres:16-alpine
+    profiles: ["database"]
+    environment:
+      POSTGRES_DB: fggsnap
+      POSTGRES_USER: fggsnap
+      POSTGRES_PASSWORD: fggsnap
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fggsnap -d fggsnap"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  links_data:
+  postgres_data:

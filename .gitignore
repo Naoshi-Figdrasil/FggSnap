@@ -1,11 +1,38 @@
-node_modules
-apps/*/dist
-apps/*/.next
-apps/*/coverage
+# Dependencies
+node_modules/
+
+# Environment files and local secrets
 .env
+.env.*
+!.env.example
+!**/.env.example
+
+# Build output and generated TypeScript/Vite files
+dist/
+coverage/
+*.tsbuildinfo
+apps/*/vite.config.js
+apps/*/vite.config.d.ts
+
+# Runtime data
+data/
+*.log
+
+# Docker local overrides
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Operating system and editor files
 .DS_Store
-.tsbuildinfo, dist
-coverage
-data
-vite.config.js
-vite.config.d.ts.
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Package manager and tool caches
+.npm/
+.pnpm-store/
+.turbo/
